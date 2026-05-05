@@ -42,9 +42,11 @@ const PlaceOrder = () => {
     e.preventDefault();
     try {
       let orderItems = [];
+      let quan = 0;
       for (const items in cartItems) {
         for (const item in cartItems[items]) {
           if (cartItems[items][item] > 0) {
+            quan = quan + cartItems[items][item];
             const itemInfo = structuredClone(
               products.find((product) => product._id === items)
             );
@@ -60,7 +62,7 @@ const PlaceOrder = () => {
       let orderData = {
         address: formData,
         items: orderItems,
-        amount: getCartAmount() + delivery_fee,
+        amount: getCartAmount() + delivery_fee * quan,
       };
 
       switch (method) {

@@ -4,7 +4,7 @@ import Title from "../components/Title";
 import axios from "axios";
 
 const Orders = () => {
-  const { backendUrl, token, currency } = useContext(ShopContext);
+  const { backendUrl, token, currency, delivery_fee } = useContext(ShopContext);
 
   const [orderData, setOrderData] = useState([]);
 
@@ -25,7 +25,7 @@ const Orders = () => {
         response.data.orders.map((order) => {
           order.items.map((item) => {
             item["status"] = order.status;
-            item["payment"] = order.payment;
+            item["payment"] = order.amount;
             item["paymentMethod"] = order.paymentMethod;
             item["date"] = order.date;
             allOrdersItem.push(item);
@@ -62,7 +62,7 @@ const Orders = () => {
                 <div className="flex items-center gap-3 mt-1 text-base">
                   <p>
                     {currency}
-                    {item.price * item.quantity}
+                    {item.price * item.quantity + delivery_fee * item.quantity}
                   </p>
                   <p>Quantity: {item.quantity}</p>
                   <p>Size: {item.size}</p>
