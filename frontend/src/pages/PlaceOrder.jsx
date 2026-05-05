@@ -123,8 +123,8 @@ const PlaceOrder = () => {
         <input
           required
           onChange={onChangeHandler}
-          name="lastName"
-          value={formData.lastName}
+          name="email"
+          value={formData.email}
           className="border border-gray-300 rounded py-1.5 px-3.5 w-full"
           type="email"
           placeholder="Email Address"
